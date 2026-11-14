@@ -13,6 +13,8 @@ A simple multi-page website for a preschool project.
 - `about.html`: Vision, mission, values, founder
 - `programs.html`: Playgroup, Nursery, Junior KG, Senior KG
 - `uniform.html`: Uniform guide
+- `gallery.html`: Photo gallery (photos listed in `gallery.json`)
 - `admissions.html`: Admissions, enquiry form, FAQ
 
 Plain HTML, CSS and JavaScript, hosted on GitHub Pages. No build step needed: open `index.html` to view it locally.
+

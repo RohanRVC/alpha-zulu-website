@@ -11,6 +11,36 @@ if (zoom && box) {
   box.addEventListener('click', () => box.classList.remove('open'));
 }
 
+// gallery: photos are listed in gallery.json (file name in assets/gallery/ + caption)
+const galleryEl = document.getElementById('gallery');
+if (galleryEl) {
+  const empty = document.getElementById('galleryEmpty');
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  fetch('gallery.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(items => {
+      if (!items.length) { empty.hidden = false; return; }
+      items.forEach(it => {
+        const fig = document.createElement('figure');
+        const img = document.createElement('img');
+        img.src = 'assets/gallery/' + it.file;
+        img.alt = it.caption || 'Alpha Zulu photo';
+        img.loading = 'lazy';
+        fig.appendChild(img);
+        if (it.caption) {
+          const cap = document.createElement('figcaption');
+          cap.textContent = it.caption;
+          fig.appendChild(cap);
+        }
+        fig.addEventListener('click', () => { lbImg.src = img.src; lb.classList.add('open'); });
+        galleryEl.appendChild(fig);
+      });
+      lb.addEventListener('click', () => lb.classList.remove('open'));
+    })
+    .catch(() => { empty.hidden = false; });
+}
+
 // enquiry form -> opens visitor's email app with details filled in
 const form = document.getElementById('enquiryForm');
 if (form) {
